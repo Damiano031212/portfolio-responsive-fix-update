@@ -1229,17 +1229,17 @@ body.animate #sparkmind_photo {
 }
 
 .sparkmind_cloche_photo{
-    aspect-ratio: 58/35;
+    aspect-ratio: 58/33;
     background: url(sparkmind_cloche.png) no-repeat center;
     background-size: 94%;
 }
 #palette{
-    aspect-ratio: 	308/163;
+    aspect-ratio: 	308/125;
     background: url(palette.png) no-repeat center;
     background-size: 80%;
 }
 #tipografia{
-    aspect-ratio: 326/125;
+    aspect-ratio: 326/81;
     background: url(tipografia.png) no-repeat center;
     background-size: 65%;
 }
