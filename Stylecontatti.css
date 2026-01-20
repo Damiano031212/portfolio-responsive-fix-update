@@ -1,0 +1,634 @@
+/* =========================================
+   1. FONTS & TYPOGRAPHY
+   ========================================= */
+@font-face {
+    font-family: "HelveticaDisplay";
+    src: url("../Font/Helvetica_Display_regular.woff") format("woff"),
+         url("../Font/Helvetica_Display_regular2.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaDisplay";
+    src: url("../Font/Helvetica_Display.woff") format("woff"),
+         url("../Font/Helvetica_Display2.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+p{
+    margin: 0;
+}
+html, body {
+    background-color: #070707; /* Sfondo nero profondo */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    cursor:default;
+    display: flex;
+    flex-direction: column;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sta sopra lo sfondo nero (0) ma sotto il contenuto (2) */
+    pointer-events: auto; /* Permette al canvas di sentire il mouse (per il fumo) */
+}
+.Navigation{
+    display: none;
+}
+
+.menu{
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px ;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.menu_text{
+    
+    z-index: 10;
+    font-family: "Helvetica Now Display", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration-color: #ffffff;
+}
+
+.text_under-decoration{
+    text-decoration-color: #ffffff;
+    
+    z-index: 10;
+}
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #303030; /* Sfondo nero profondo */
+    z-index: 20000; /* Sopra a tutto, anche al cursore se necessario */
+    
+    /* Stato iniziale: spostato completamente a destra */
+    transform: translateX(100%);
+    
+    /* Animazione richiesta: 1s durata, curva personalizzata */
+    transition: transform 1s cubic-bezier(0.5, 0, 0, 1);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra i link verticalmente */
+    align-items: center;
+}
+
+/* Classe attiva per far entrare il menu */
+.overlay-container.is-open {
+    transform: translateX(0%);
+}
+
+/* Stile del pulsante CLOSE */
+.menu-close-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px; /* Stesso padding del tuo header/menu originale */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-family: "Helvetica Now Display", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer; /* O 'none' se usi il custom cursor */
+    padding: 0 20px;
+    /* Reset stili browser */
+    outline: none;
+}
+
+/* Stile dei Link nel menu Overlay */
+.overlay-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Spazio tra i link */
+    text-align: center;
+}
+
+.overlay-link {
+    display: flex;
+    flex-direction: row;
+    font-family: "Helvetica Now Display", sans-serif;
+    align-items: center;
+    font-weight: 700;
+    font-size: 36px; /* Grandi per impatto visivo */
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0; /* Partono invisibili per un effetto cascata (opzionale) */
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    gap: 12px;
+}
+
+/* Quando il menu è aperto, mostriamo i link */
+.overlay-container.is-open .overlay-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover effect sui link overlay */
+.overlay-link:hover {
+    color: #cccccc; /* Leggero grigio o tieni bianco */
+    text-decoration: underline;
+}
+.home_icon_mobile{
+    width: 32px;
+    height: 32px;
+    background: url(home+indentity_fill.svg) no-repeat center;
+    background-size: contain;
+    opacity: 0;
+}
+.work_icon_mobile
+{
+    width: 32px;
+    height: 32px;
+    background: url(work+identity_fill.svg) no-repeat center;
+    background-size: contain;
+    opacity: 0;
+}
+.contatti_icon_mobile
+{
+    width: 32px;
+    height: 32px;
+    background: url(send+identity_fill.svg) no-repeat center;
+    background-size: contain;
+    opacity: 1;
+}
+.about_icon_mobile
+{
+    width: 32px;
+    height: 32px;
+    background: url(about+identity_fill.svg) no-repeat center;
+    background-size: contain;
+    opacity: 0;
+}
+.perc_opacity{
+    opacity: 50%;
+}
+/* Ritardi per animazione a cascata dei link (opzionale, per stile) */
+.overlay-container.is-open .overlay-link:nth-child(1) { transition-delay: 0.6s; }
+.overlay-container.is-open .overlay-link:nth-child(2) { transition-delay: 0.7s; }
+.overlay-container.is-open .overlay-link:nth-child(3) { transition-delay: 0.8s; }
+.overlay-container.is-open .overlay-link:nth-child(4) { transition-delay: 0.9s; }
+/* ==========================================================================
+   FIX PER "FLASH" E STATO VISIVO (ANTI-FOUC AVANZATO)
+   ========================================================================== */
+
+/* 1. Forza l'overlay a essere visibile e fermo */
+html.menu-transition-active #overlayMenu {
+    transform: translateX(0%) !important;
+    transition: none !important;
+    opacity: 1 !important;
+    display: flex !important;
+}
+
+/* 2. Mostra i contenitori dei link, ma... */
+html.menu-transition-active .overlay-link {
+    transition-delay: 0s !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* 3. ...FORZA LO STATO "SPENTO" SU TESTI E ICONE (Il trucco è qui) */
+/* Questo nasconde l'evidenziazione della pagina attuale definita nell'HTML statico */
+
+/* Rende tutti i testi semi-trasparenti (come se non fossero selezionati) */
+html.menu-transition-active .overlay-link p {
+    opacity: 0.5 !important; 
+}
+
+/* Nasconde tutte le icone */
+html.menu-transition-active .overlay-link div {
+    opacity: 0 !important;
+}
+   .container_contact {
+        height: 100%;
+    }
+.Group_right{
+    display: none;
+}
+.Group_left{
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.paragraph_contact{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+.context_page{
+    height: 176px;
+    width: 176px;
+    background: url(send+identity_fill.svg) no-repeat center;
+    background-size: contain;
+}
+.Tittle {
+        margin: 0;
+        font-family: "Helvetica Now Display", sans-serif;
+        font-weight: 700;
+        font-size: 36px;
+        color: #ffffff;
+}
+
+    .Paragraph {
+        font-family: "roboto", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #ffffff;
+    }
+    
+    .contatta {
+        border: none;
+        background: none;
+        font-family: "roboto", sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: #ffffff;
+        text-decoration-line: underline;
+        padding: 0;
+        z-index: 2;
+    }
+/* =========================================
+   MEDIA QUERY (DESKTOP)
+   ========================================= */
+@media screen and (min-width: 1024px) {
+
+p{
+    margin: 18px 0;
+}
+    /* =========================================
+       2. GLOBAL RESET & BASE STYLES
+       ========================================= */
+    html, body {
+        height: 100vh;
+        cursor: none; /* Nasconde il cursore di default */
+        background-color: #070707;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+    }
+
+    /* Nasconde il puntatore nativo su elementi interattivi */
+    a, a:link, a:visited, a:hover, a:active,
+    button, input, textarea, select, label {
+        cursor: none !important;
+    }
+
+    strong {
+        font-family: "roboto", sans-serif;
+        font-weight: 600;
+    }
+
+    /* =========================================
+       3. LAYOUT & CANVAS
+       ========================================= */
+    #container {
+        position: fixed;
+        mix-blend-mode: difference;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* Dietro al contenuto ma visibile */
+        pointer-events: auto; /* Assicura che il canvas catturi il mouse */
+    }
+
+    /* =========================================
+       4. CUSTOM CURSOR
+       ========================================= */
+    .cursor {
+        display: block;
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        border-radius: 50%;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%) scale(1);
+        
+        /* Transizioni estetiche */
+        transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+                    width 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+                    height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                    opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        
+        opacity: 0;
+        z-index: 9999;
+    }
+
+    /* =========================================
+       5. NAVIGATION BAR
+       ========================================= */
+       .overlay-container{
+        display: none;
+       }
+       
+.menu{
+    display: none;
+}
+    .Navigation {
+        padding-top: 0;
+        padding-bottom: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100px;
+        padding-left: 52px;
+        padding-right: 54px;
+        z-index: 2; /* Sopra il canvas */
+    }
+
+    .Nav_link {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 112px;
+    }
+
+    .Nav_link a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+    }
+
+    .Nav_text {
+        font-family: "Helvetica Now Display", sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: #ffffff;
+        text-decoration: none;
+        opacity: 0.5;               /* Opacità iniziale */
+        transform: scale(1);        /* Stato base */
+        transition: opacity 0.3s ease, 
+                    transform 0.3s ease;
+    }
+
+    .Nav_text:hover {
+        opacity: 1;
+        transform: scale(1.25);
+        filter: brightness(1.2);
+    }
+
+    #Actual_page {
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+
+    .nav-label {
+        font-family: "Helvetica Now Display", sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 100%;
+        white-space: nowrap;
+    }
+
+    .Nav_link a:hover .nav-label {
+        opacity: 1;
+    }
+
+    /* --- Navigation Icons --- */
+    .home-icon {
+        width: 28px;
+        height: 28px;
+        background: url('home+identity_no_fill.svg') no-repeat center;
+        background-size: contain;
+    }
+
+    .work-icon {
+        width: 28px;
+        height: 28px;
+        background: url('work+identity_no_fill.svg') no-repeat center;
+        background-size: contain;
+    }
+
+    .contatti-icon {
+        width: 28px;
+        height: 28px;
+        background: url('send+identity_fill.svg') no-repeat center;
+        background-size: contain;
+    }
+
+    .about-icon {
+        width: 28px;
+        height: 28px;
+        background: url('about+identity_no_fill.svg') no-repeat center;
+        background-size: contain;
+    }
+
+    /* =========================================
+       6. PAGE CONTENT (CONTACT)
+       ========================================= */
+       
+.context_page{
+    display: none;
+}
+    .container_contact {
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-left: 54px;
+        margin-right: 54px;
+        margin-bottom: 100px;
+    }
+    
+.paragraph_contact{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0;
+}
+    .Group_left{
+        padding: 0;
+        display: flex;
+        align-items: flex-start;
+    }
+    .Tittle {
+        width: 617px;
+        margin: 0;
+        font-family: "Helvetica Now Display", sans-serif;
+        font-weight: 700;
+        font-size: 88px;
+        color: #ffffff;
+        line-height: 97px;
+    }
+
+    .Paragraph {
+        width: 660px;
+        font-family: "roboto", sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        letter-spacing: 0%;
+        color: #ffffff;
+    }
+
+    .info {
+        font-family: "roboto", sans-serif;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .contatta {
+        border: none;
+        background: none;
+        font-family: "roboto", sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        color: #ffffff;
+        text-decoration-line: underline;
+        padding: 0;
+        z-index: 2;
+    }
+
+    .click_contatta {
+        z-index: 2;
+        position: relative;
+        width: fit-content;
+    }
+
+    /* =========================================
+       7. SOCIAL SECTIONS
+       ========================================= */
+       
+.Group_right{
+    display: block;
+}
+    .Social {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        height: fit-content;
+        gap: 8px;
+    }
+
+    .father_insta {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .father_gmail {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 24px;
+    }
+
+    /* --- Social Icons --- */
+    .Insta {
+        height: 44px;
+        width: 42.620323181152344px;
+        background: url(insta.svg) no-repeat center;
+        background-size: contain;
+        filter: invert(100%) brightness(200%);
+    }
+
+    .Gmail {
+        height: 44px;
+        width: 42.620323181152344px;
+        background: url(gmail.svg) no-repeat center;
+        background-size: contain;
+        filter: invert(100%) brightness(200%);
+    }
+
+    .linkedin {
+        height: 44px;
+        width: 42.620323181152344px;
+        background: url(linkedin-svgrepo-com.svg) no-repeat center;
+        background-size: contain;
+        filter: invert(100%) brightness(200%);
+    }
+
+    /* =========================================
+       8. PAGE TRANSITIONS (SHUTTER)
+       ========================================= */
+    .page-shutter {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        pointer-events: none;
+        z-index: 10000;
+        mix-blend-mode: difference;
+
+        /* STATO INIZIALE (Nascosto in alto) */
+        transform: translateY(-100%);
+        transition: transform 1s ease-in-out;
+        will-change: transform;
+    }
+
+    .page-shutter.down {
+        transform: translateY(0%); /* Copre lo schermo */
+        pointer-events: all; /* Blocca i click mentre copre */
+        transition: transform 1s ease-in-out;
+    }
+
+    .page-shutter.reveal {
+        transform: translateY(-100%);
+    }
+}
