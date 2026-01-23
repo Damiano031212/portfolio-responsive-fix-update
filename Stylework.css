@@ -498,7 +498,7 @@ strong{
 .Navigation {
     padding-top: 0;
     padding-bottom: 0;
-    position: fixed; /* Fissa in alto */
+    position: relative; 
     top: 0;
     left: 0;
     right: 0;
@@ -714,6 +714,7 @@ button.container_box:hover {
     z-index: 2;
     display: flex;
     flex-direction: column;
+    margin-top: 32px;
 }
 
 .home-icon {
@@ -887,5 +888,6 @@ button.container_box:hover {
 #margin_bottom_last_card{
     padding-bottom: 0px;
 }
+
 
 }
