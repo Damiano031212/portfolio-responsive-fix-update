@@ -59,7 +59,7 @@ button, input, textarea, select, label {
 .cursor{
     display: none;
 }
-.navigation_container_responsive{
+._container_responsive{
     display: flex;
     flex-direction: column;
 }
@@ -244,7 +244,7 @@ html.menu-transition-active .overlay-link div {
     color: #ffffff;
     text-decoration-color: #ffffff;
 }
-.Navigation{
+.{
     display: none;
 }
 .container_hero_identity{
@@ -418,7 +418,7 @@ body {
 .Navigation {
     padding-top: 0;
     padding-bottom: 0;
-    position: fixed; /* Fissa in alto */
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -657,4 +657,5 @@ button, input, textarea, select, label {
     pointer-events: all; /* Blocca i click mentre transiziona */
     transition: transform 1s ease-in-out;
 }
+
 }
