@@ -265,7 +265,7 @@ align-items: flex-start;
 .container_father_paragrafi{
     display: flex;
     flex-direction: column;
-    z-index: 10;
+    z-index: 9;
 }
 .about_me{
     line-height: 124%;
