@@ -34,6 +34,9 @@ html.menu-transition-active .overlay-link {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+.Navigation {
+   display: none;
+}
 #container {
     display: block;
     position: fixed;
@@ -659,3 +662,4 @@ button, input, textarea, select, label {
 }
 
 }
+
