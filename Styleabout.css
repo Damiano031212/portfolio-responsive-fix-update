@@ -66,7 +66,7 @@ html.menu-transition-active .overlay-link {
     padding: 0 20px ;
     margin-top: 20px;
     margin-bottom: 10px;
-
+    mix-blend-mode: difference;
 }
 
 .overlay-container {
@@ -226,11 +226,13 @@ html.menu-transition-active .overlay-link div {
 }
 .text_under-decoration{
     text-decoration-color: #ffffff;
-    
+    position: fixed;
     z-index: 10;
+    mix-blend-mode: difference;
+    width: 100%
 }
 .menu_text{
-    
+    mix-blend-mode: difference;
     z-index: 10;
     font-family: "Helvetica Now Display", sans-serif;
     font-weight: 700;
@@ -258,6 +260,7 @@ align-items: flex-start;
   padding: 0 20px;
   margin-bottom: 32px;
   gap: 116px;
+  margin-top: 56px;
 }
 .container_father_paragrafi{
     display: flex;
