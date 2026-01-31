@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- SCALE / HOVER ---
     const interactive = document.querySelectorAll(
-        "a, button, .clickable, .project-wrapper"
+        "a, button, .clickable, .project-wrapper, #flipCoinWrapper"
     );
 
     function applyCursorScale() {
