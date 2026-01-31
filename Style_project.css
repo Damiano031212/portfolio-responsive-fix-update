@@ -21,7 +21,9 @@ html, body {
     display: flex;
     flex-direction: column;
 }
-
+.face-video {
+    display: none;
+}
 .Navigation{
     display: none;
 }
@@ -780,7 +782,7 @@ button, input, textarea, select, label {
 }
 #myfitnesspal_foto{
     
-    aspect-ratio: 4/3;
+    aspect-ratio: 4096/1906;
   background: url(mfp_photo.png) no-repeat center;
   background-size: contain;
 }
@@ -1561,6 +1563,166 @@ a {
 }
 #last_text{
     margin-bottom: 0;
+}
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+/* ============================================
+   FLIP COIN – WRAPPER (posizionamento fixed)
+   ============================================ */
+#flipCoinWrapper {
+    position: fixed;
+    /* centrato orizzontalmente nel viewport */
+    left: 98%;
+    transform: translateX(-50%);
+    /* posizione Y base: centrato verticalmente */
+    top: 100%;
+    margin-top: -60px; /* metà dell'altezza della moneta */
+    z-index: 100;
+    /* stato iniziale: nascosto e sotto */
+    opacity: 0;
+    /* La proprietà custom --footer-push viene scritta da JS */
+    --footer-push: 0px;
+    /* translateY combina: posizione iniziale bajo + footer push */
+    /* Quando visibile, JS aggiunge la classe .visible che porta translateY a 0 + footer-push */
+    cursor: none;
+}
+
+/* ============================================
+   FLIP COIN – STRUTTURA
+   ============================================ */
+.flip-coin {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    /* Prospettiva per dare profondità al flip */
+    perspective: 1200px;
+    cursor: pointer;
+    cursor: none;
+    pointer-events: auto;
+}
+
+.flip-coin-inner {
+    /* Questo wrapper non è nel DOM, usiamo direttamente .flip-coin come pivot */
+}
+
+/* Le due facce sono posizionate sovrapposte */
+.flip-coin-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* forma circolare = moneta */
+    border: 1px solid #0000002a;
+    overflow: hidden;
+    /* Nasconde la faccia quando è dalla parte di dietro */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* bordo e ombra per dare volume */
+    transition: box-shadow 0.3s ease;
+    mix-blend-mode: difference;
+}
+
+/* Video dentro ogni faccia: riempie il cerchio */
+.face-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    mix-blend-mode: difference;
+}
+
+/* La faccia posteriore è pre-ruotata di 180° sull'asse X (flip moneta) */
+.flip-coin-back {
+    transform: rotateX(180deg);
+}
+
+/* ============================================
+   APPARIZIONE (scroll trigger)
+   Mimika la logica di sfera.js:
+     - sphereVisible = true  → opacity 0→1, saleY da sotto
+     - sphereVisible = false → opacity 1→0, torna sotto
+   ============================================ */
+#flipCoinWrapper {
+    /* Stato iniziale: nascosto, posizionato 150px sotto */
+    opacity: 0;
+    transform: translateX(-50%) translateY(150px);
+    transition:
+        opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    /* Easing ripreso da sfera.js: appearEasing = cubicBezierEasing(0.25, 0.1, 0.25, 1) */
+}
+
+#flipCoinWrapper.visible {
+    opacity: 1;
+    /* translateY usa la var custom per il footer push */
+    transform: translateX(-50%) translateY(var(--footer-push));
+}
+
+/* ============================================
+   ANIMAZIONE FLIP (click) – rotateX per effetto "testa o croce"
+   La classe .flipping viene aggiunta/rimossa da JS con timing preciso
+   ============================================ */
+.flip-coin {
+    transform-style: preserve-3d;
+    /* nessuna transizione di default: la controlliamo con JS per il settle */
+}
+
+/* Stato durante il flip: 3 giri completi (1080°) */
+.flip-coin.flipping {
+    animation: coinFlip 1.5s cubic-bezier(0.5, 0, 0.3, 1) forwards;
+    /* Easing ripreso da sfera.js: clickEasing = cubicBezierEasing(0.5, 0, 0.3, 1) */
+}
+
+@keyframes coinFlip {
+    0% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        /* 3 giri = 1080°, poi torna a 0 per il settle (gestito dal JS con la classe .settling) */
+        transform: rotateX(1080deg);
+    }
+}
+
+/* Settle: dopo il flip torna a 0° con un easing soft */
+.flip-coin.settling {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: rotateX(0deg);
+}
+
+/* ============================================
+   LEVITAZIONE (loop infinito, come in sfera.js)
+   Applica solo quando la moneta è visibile e non sta flippando
+   ============================================ */
+#flipCoinWrapper.visible .flip-coin:not(.flipping):not(.settling) {
+    animation: levitate 3s ease-in-out infinite;
+}
+
+@keyframes levitate {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 }
 
