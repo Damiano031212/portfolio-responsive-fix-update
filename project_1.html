@@ -103,11 +103,7 @@ MYFITNESSPALL
     
     <div id="container"></div>
     
-    <!-- Video elementi (nascosti, usati come texture) -->
-    <video id="videoSfondo" loop muted playsinline crossorigin="anonymous" style="display: none;">
-        <source src="videos/sfondo.mp4" type="video/mp4">
-    </video>
-    
+  
  <div id="overlayMenu" class="overlay-container">
     <div class="menu-close-container">
         <button id="closeMenuBtn" class="close-btn">CLOSE</button>
@@ -122,7 +118,26 @@ MYFITNESSPALL
 </div>
     
 <script src="menu.js"></script>
+   <!-- Spazio di scroll per triggeriare l'apparizione a 1800px (come APPEAR_HEIGHT in sfera.js) -->
 
+
+    <!-- Contenitore fixed del flip-coin -->
+    <div id="flipCoinWrapper">
+        <div class="flip-coin" id="flipCoin">
+            <!-- FRONT -->
+            <div class="flip-coin-face flip-coin-front">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- BACK (stesso video, visibile dopo il flip) -->
+            <div class="flip-coin-face flip-coin-back">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
    <footer class="footer_container">
            
 <div class="container_father_box">
@@ -187,7 +202,6 @@ MYFITNESSPALL
   
    </footer> 
      
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> <!-- Three.js -->
 <script src="sfera.js"></script>   
 <script src="project_intro.js"></script>
 <script src="progress-bar.js"></script>
