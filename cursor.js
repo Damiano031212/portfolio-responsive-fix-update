@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetElement = document.querySelector(".damiano_zangrilli");
         if (targetElement) {
             const rect = targetElement.getBoundingClientRect();
-            mouseX = rect.left + rect.width / 3.7;
+            mouseX = rect.left + rect.width / 3.741;
             mouseY = rect.top + (rect.height - 185);
         } else {
             mouseX = window.innerWidth / 2;
