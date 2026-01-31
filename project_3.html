@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Damiano Zangrilli - Portfolio - verso</title>
@@ -104,14 +103,7 @@ Il progetto è stato sviluppato in collaborazione con <strong>Deborah Legname </
 
         <div class="cursor"></div>
 
-    
-    <div id="container"></div>
-    
-    <!-- Video elementi (nascosti, usati come texture) -->
-    <video id="videoSfondo" loop muted playsinline crossorigin="anonymous" style="display: none;">
-        <source src="videos/sfondo.mp4" type="video/mp4">
-    </video>
-      
+   
  <div id="overlayMenu" class="overlay-container">
     <div class="menu-close-container">
         <button id="closeMenuBtn" class="close-btn">CLOSE</button>
@@ -124,7 +116,22 @@ Il progetto è stato sviluppato in collaborazione con <strong>Deborah Legname </
         <a href="about.html" class="overlay-link"><div class="about_icon_mobile"></div><p class="perc_opacity" >About</p></a>
     </nav>
 </div>
-
+ <div id="flipCoinWrapper">
+        <div class="flip-coin" id="flipCoin">
+            <!-- FRONT -->
+            <div class="flip-coin-face flip-coin-front">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- BACK (stesso video, visibile dopo il flip) -->
+            <div class="flip-coin-face flip-coin-back">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
    <footer class="footer_container">
         
    
