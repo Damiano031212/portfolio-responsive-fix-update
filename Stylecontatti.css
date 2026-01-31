@@ -536,7 +536,9 @@ p{
         font-weight: 700;
         color: #ffffff;
     }
-
+a{
+    text-decoration: none;
+}
     .contatta {
         border: none;
         background: none;
