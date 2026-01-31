@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Damiano Zangrilli - Portfolio - Sparkmind</title>
@@ -98,13 +97,7 @@ TIPOGRAFIA
 
         <div class="cursor"></div>
 
-        
-    <div id="container"></div>
     
-    <!-- Video elementi (nascosti, usati come texture) -->
-    <video id="videoSfondo" loop muted playsinline crossorigin="anonymous" style="display: none;">
-        <source src="videos/sfondo.mp4" type="video/mp4">
-    </video>
       
  <div id="overlayMenu" class="overlay-container">
     <div class="menu-close-container">
@@ -118,6 +111,22 @@ TIPOGRAFIA
         <a href="about.html" class="overlay-link"><div class="about_icon_mobile"></div><p class="perc_opacity" >About</p></a>
     </nav>
 </div>
+ <div id="flipCoinWrapper">
+        <div class="flip-coin" id="flipCoin">
+            <!-- FRONT -->
+            <div class="flip-coin-face flip-coin-front">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- BACK (stesso video, visibile dopo il flip) -->
+            <div class="flip-coin-face flip-coin-back">
+                <video class="face-video" autoplay muted loop playsinline>
+                    <source src="videos/freccia_su.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
    <footer class="footer_container">
         
  
@@ -186,8 +195,7 @@ TIPOGRAFIA
 
 
 <script src="menu.js"></script>
-    <!-- Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
 <script src="sfera.js"></script>   
 <script src="project_intro.js"></script>
 <script src="progress-bar.js"></script>
