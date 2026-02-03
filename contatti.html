@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        if (sessionStorage.getItem('menuTransition') === 'true') {
+            document.documentElement.classList.add('menu-transition-active');
+        }
+    </script>
+    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damiano Zangrilli - Contatti</title>
+
+    <link rel="icon" type="image/svg+xml" href="marchio.svg" sizes="any">
+    <link rel="stylesheet" href="Stylecontatti.css">
+</head>
+
+<body>
+
+    <nav class="Navigation">
+        <div class="Nav_link">
+            <a class="Nav_text" href="home.html">
+                <div class="home-icon"></div>
+                <span class="nav-label">Home</span>
+            </a>
+            <a class="Nav_text" href="Work.html">
+                <div class="work-icon"></div>
+                <span class="nav-label">Work</span>
+            </a>
+            <a id="Actual_page" class="Nav_text" href="contatti.html">
+                <div class="contatti-icon"></div>
+                <span class="nav-label">Contatti</span>
+            </a>
+            <a class="Nav_text" href="about.html">
+                <div class="about-icon"></div>
+                <span class="nav-label">About</span>
+            </a>
+        </div>
+    </nav>
+
+    <a class="text_under-decoration" href="">
+        <div class="menu">
+            <p class="menu_text">MENU</p>
+        </div>
+    </a>
+    <div class="container_contact">
+        <div class="Group_left">
+            <p class="Tittle">CONTATTAMI CON UN CLICK</p>
+            <div class="context_page"></div>
+
+            <div class="paragraph_contact">
+                <p class="Paragraph">Se sei un’agenzia o un’azienda digitale alla ricerca di un Digital Product Designer
+                    con una particolare attenzione ai dettagli, alla dinamicità e a un design dal valore autentico, sono
+                    sempre disponibile a valutare nuove collaborazioni e opportunità professionali.</p>
+
+                <a href="mailto:dzangrillidesign@gmail.com" class="contatta">Contatta
+            </div></a>
+
+
+            </a>
+
+        </div>
+        <div class="Group_right">
+
+            <div class="Social">
+                <div class="father_insta">
+                    <div class="Insta"></div>
+                    <a
+                        href="https://www.instagram.com/dzangrilli_design?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                        <p class="info">Dzangrilli_design</p>
+                    </a>
+                </div>
+                <div class="father_gmail">
+                    <div class="Gmail"></div>
+                    <a href="mailto:dzangrillidesign@gmail.com">
+                        <p class="info">Dzangrillidesign@gmail.com</p>
+                    </a>
+                </div>
+                <div class="father_gmail">
+                    <div class="linkedin"></div>
+                    <a href="https://www.linkedin.com/in/damiano-maria-zangrilli-691a75362/">
+                        <p class="info">Damiano Zangrilli</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="overlayMenu" class="overlay-container">
+        <div class="menu-close-container">
+            <button id="closeMenuBtn" class="close-btn">CLOSE</button>
+        </div>
+
+        <nav class="overlay-nav">
+            <a href="home.html" class="overlay-link">
+                <div class="home_icon_mobile"></div>
+                <p class="perc_opacity">Home</p>
+            </a>
+            <a href="Work.html" class="overlay-link">
+                <div class="work_icon_mobile"></div>
+                <p class="perc_opacity">Work</p>
+            </a>
+            <a href="contatti.html" class="overlay-link">
+                <div class="contatti_icon_mobile"></div>
+                <p>Contatti</p>
+            </a>
+            <a href="about.html" class="overlay-link">
+                <div class="about_icon_mobile"></div>
+                <p class="perc_opacity">About</p>
+            </a>
+        </nav>
+    </div>
+
+
+
+
+    <script src="menu.js"></script>
+
+    <script src="transition.js"></script>
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+    <script src="cursor.js"></script>
+</body>
+
+</html>
