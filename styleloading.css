@@ -1,0 +1,43 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #141414;
+    overflow: hidden;
+}
+
+.LoadingPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    position: fixed;
+    width: 100%;
+    height: 110%;
+    mix-blend-mode: difference;
+}
+
+/* =========================================
+   UNIFIED CURSOR STYLES
+   ========================================= */
+
+/* Nasconde il cursore di sistema */
+body {
+    cursor: none;
+}
+
+
+/* Disabilita il cursore personalizzato su dispositivi touch */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        cursor: auto !important;
+    }
+
+    .cursor {
+        display: none !important;
+    }
+}
