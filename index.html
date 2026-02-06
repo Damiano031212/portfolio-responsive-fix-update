@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading</title>
+
+    <link rel="icon" type="image/svg+xml" href="marchio.svg" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styleloading.css">
+</head>
+
+<body class="LoadingPage">
+
+    <div id="container"></div>
+
+    <!-- Video usato come texture -->
+    <video id="videoSfondo" loop muted playsinline crossorigin="anonymous" style="display:none">
+        <source src="videos/sfondo.mp4" type="video/mp4">
+    </video>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="loading.js"></script>
+
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+    <script src="cursor.js"></script>
+</body>
+
+</html>

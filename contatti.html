@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        if (sessionStorage.getItem('menuTransition') === 'true') {
+            document.documentElement.classList.add('menu-transition-active');
+        }
+    </script>
+    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damiano Zangrilli - Contatti</title>
+
+    <link rel="icon" type="image/svg+xml" href="marchio.svg" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Stylecontatti.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="light-mode.css">
+    <script src="theme.js"></script>
+</head>
+
+<body>
+
+    <nav class="Navigation">
+        <div class="Nav_link">
+            <a class="Nav_text" href="home.html">
+                <div class="home-icon"></div>
+                <span class="nav-label">Home</span>
+            </a>
+            <a class="Nav_text" href="Work.html">
+                <div class="work-icon"></div>
+                <span class="nav-label">Work</span>
+            </a>
+            <a id="Actual_page" class="Nav_text" href="contatti.html">
+                <div class="contatti-icon"></div>
+                <span class="nav-label">Contatti</span>
+            </a>
+            <a class="Nav_text" href="about.html">
+                <div class="about-icon"></div>
+                <span class="nav-label">About</span>
+            </a>
+        </div>
+    </nav>
+
+
+
+    <!-- Global HUD Overlay -->
+    <div class="hud-overlay">
+        <div class="corner-marker top-left"></div>
+        <div class="corner-marker top-right"></div>
+        <div class="corner-marker bottom-left"></div>
+        <div class="corner-marker bottom-right"></div>
+        <div class="side-markers left">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="side-markers right">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Scan Lines Overlay -->
+    <div class="scan-lines"></div>
+
+    <!-- Calibration Grid Background -->
+    <div class="calibration-grid"></div>
+
+    <!-- Main Communication Hub -->
+    <main class="comm-hub-console">
+
+        <!-- Hero Section -->
+        <header class="hub-hero-section">
+            <!-- HUD Elements -->
+            <div class="hud-element top-left">
+                <div class="crosshair"></div>
+                <span class="coord-label">LAT: 37.5079° N</span>
+            </div>
+            <div class="hud-element top-right">
+                <span class="coord-label">LONG: 15.0830° E</span>
+                <div class="crosshair"></div>
+            </div>
+            <div class="hud-element bottom-left">
+                <div class="crosshair"></div>
+                <span class="coord-label">STATUS: ACTIVE</span>
+            </div>
+            <div class="hud-element bottom-right">
+                <span class="coord-label">SYS.VER.2.4.1</span>
+                <div class="crosshair"></div>
+            </div>
+
+            <div class="hero-content">
+                <h1 class="hub-title">
+                    COMMUNICATION
+                    <br>
+                    <span class="text-gradient">HUB</span>
+                </h1>
+
+                <p class="hub-subtitle">
+                    Established secure channel. All transmission protocols active and ready for signal exchange.
+                </p>
+
+                <!-- CTA Contact Button -->
+                <a href="mailto:dzangrillidesign@gmail.com" class="cta-contact-btn">
+                    <span class="cta-icon">▶</span>
+                    <span class="cta-text">INITIATE CONTACT</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Communication Channels Grid -->
+        <section class="comm-channels-grid">
+
+            <!-- Email Channel -->
+            <article class="channel-node" data-protocol="email">
+                <!-- Node HUD Elements -->
+                <div class="node-hud top-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">[0x01]</span>
+                </div>
+                <div class="node-hud top-right">
+                    <span class="hud-coords">SMTP</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+
+                <!-- Node Content -->
+                <div class="node-content">
+                    <div class="node-header">
+                        <span class="node-id">CHANNEL 01</span>
+                        <div class="node-status-indicator active"></div>
+                    </div>
+
+                    <h2 class="node-name">EMAIL TRANSMISSION</h2>
+
+                    <div class="node-metadata">
+                        <div class="meta-item">
+                            <span class="meta-label">PROTOCOL</span>
+                            <span class="meta-value">SMTP/TLS</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">SECURITY</span>
+                            <span class="meta-value secure">256-BIT</span>
+                        </div>
+                    </div>
+
+                    <a href="mailto:dzangrillidesign@gmail.com" class="comm-link">
+                        <span class="link-icon">▶</span>
+                        <span class="link-text">dzangrillidesign@gmail.com</span>
+                    </a>
+                </div>
+
+                <!-- Bottom HUD Elements -->
+                <div class="node-hud bottom-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">PRIORITY: HIGH</span>
+                </div>
+                <div class="node-hud bottom-right">
+                    <span class="hud-coords">LATENCY: 12ms</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+            </article>
+
+            <!-- LinkedIn Channel -->
+            <article class="channel-node" data-protocol="linkedin">
+                <!-- Node HUD Elements -->
+                <div class="node-hud top-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">[0x02]</span>
+                </div>
+                <div class="node-hud top-right">
+                    <span class="hud-coords">HTTPS</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+
+                <!-- Node Content -->
+                <div class="node-content">
+                    <div class="node-header">
+                        <span class="node-id">CHANNEL 02</span>
+                        <div class="node-status-indicator active"></div>
+                    </div>
+
+                    <h2 class="node-name">LINKEDIN UPLINK</h2>
+
+                    <div class="node-metadata">
+                        <div class="meta-item">
+                            <span class="meta-label">PROTOCOL</span>
+                            <span class="meta-value">HTTPS/2</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">SECURITY</span>
+                            <span class="meta-value secure">TLS 1.3</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.linkedin.com/in/damiano-maria-zangrilli-691a75362/" class="comm-link">
+                        <span class="link-icon">▶</span>
+                        <span class="link-text">Damiano Maria Zangrilli</span>
+                    </a>
+                </div>
+
+                <!-- Bottom HUD Elements -->
+                <div class="node-hud bottom-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">PRIORITY: MEDIUM</span>
+                </div>
+                <div class="node-hud bottom-right">
+                    <span class="hud-coords">LATENCY: 18ms</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+            </article>
+
+            <!-- Instagram Channel -->
+            <article class="channel-node" data-protocol="instagram">
+                <!-- Node HUD Elements -->
+                <div class="node-hud top-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">[0x03]</span>
+                </div>
+                <div class="node-hud top-right">
+                    <span class="hud-coords">HTTPS</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+
+                <!-- Node Content -->
+                <div class="node-content">
+                    <div class="node-header">
+                        <span class="node-id">CHANNEL 03</span>
+                        <div class="node-status-indicator active"></div>
+                    </div>
+
+                    <h2 class="node-name">INSTAGRAM FEED</h2>
+
+                    <div class="node-metadata">
+                        <div class="meta-item">
+                            <span class="meta-label">PROTOCOL</span>
+                            <span class="meta-value">HTTPS/2</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">SECURITY</span>
+                            <span class="meta-value secure">TLS 1.3</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.instagram.com/dzangrilli_design?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        class="comm-link">
+                        <span class="link-icon">▶</span>
+                        <span class="link-text">@dzangrilli_design</span>
+                    </a>
+                </div>
+
+                <!-- Bottom HUD Elements -->
+                <div class="node-hud bottom-left">
+                    <span class="hud-crosshair">+</span>
+                    <span class="hud-coords">PRIORITY: MEDIUM</span>
+                </div>
+                <div class="node-hud bottom-right">
+                    <span class="hud-coords">LATENCY: 22ms</span>
+                    <span class="hud-crosshair">+</span>
+                </div>
+            </article>
+
+        </section>
+
+
+    </main>
+
+    <!-- Decorative Code Blocks -->
+    <div class="code-decoration code-1">
+        <pre>{
+  "status": "online",
+  "channels": 3,
+  "encryption": "AES-256"
+}</pre>
+    </div>
+    <div class="code-decoration code-2">
+        <pre>CMD: CONNECT
+SEQ: 01-03
+STAT: READY</pre>
+    </div>
+
+
+
+    <script src="navbar.js"></script>
+    <script src="transition.js"></script>
+
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+    <script src="cursor.js"></script>
+
+
+</body>
+
+</html>
