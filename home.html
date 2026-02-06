@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <script>
+        // Questo script DEVE stare nell'head per prevenire il flash della pagina
+        if (sessionStorage.getItem('menuTransition') === 'true') {
+            document.documentElement.classList.add('menu-transition-active');
+        }
+    </script>
+    <script src="https://t.contentsquare.net/uxa/a90fd0da613c9.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damiano Zangrilli - Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="marchio.svg" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="light-mode.css">
+    <script src="theme.js"></script>
+    <base target="_blank">
+</head>
+
+<body>
+    <!-- NASA-Inspired Aesthetic Elements -->
+    <div class="scan-lines"></div>
+    <div class="calibration-grid"></div>
+
+    <div class="hud-overlay">
+        <div class="corner-marker top-left"></div>
+        <div class="corner-marker top-right"></div>
+        <div class="corner-marker bottom-left"></div>
+        <div class="corner-marker bottom-right"></div>
+        <div class="side-markers left">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="side-markers right">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <nav class="Navigation">
+        <div class="Nav_link">
+            <a id="Actual_page" class="Nav_text" href="#home">
+                <div class="home-icon"></div>
+                <span class="nav-label">Home</span>
+            </a>
+            <a class="Nav_text" id="perc_opacity" href="Work.html">
+                <div class="work-icon"></div>
+                <span class="nav-label">Work</span>
+            </a>
+            <a class="Nav_text" id="perc_opacity" href="contatti.html">
+                <div class="contatti-icon"></div>
+                <span class="nav-label">Contatti</span>
+            </a>
+            <a class="Nav_text" id="perc_opacity" href="about.html">
+                <div class="about-icon"></div>
+                <span class="nav-label">About</span>
+            </a>
+        </div>
+
+
+    </nav>
+
+
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+    <div class="hero-content">
+        <p class="hero-subtitle">UX/UI DESIGNER · CATANIA</p>
+        <h1 class="hero-title">DAMIANO ZANGRILLI</h1>
+        <p class="hero-description">
+            "Creare esperienze digitali significative attraverso un design accurato e un approccio incentrato
+            sull'utente"
+        </p>
+        <a href="mailto:dzangrillidesign@gmail.com">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text">Open to work</span>
+            </div>
+        </a>
+    </div>
+
+    <canvas id="hero-canvas"></canvas>
+    <div id="container"></div>
+
+    <!-- Video elementi (nascosti, usati come texture) -->
+    <video id="videoSfondo" loop muted playsinline crossorigin="anonymous" style="display: none;">
+        <source src="videos/sfondo.mp4" type="video/mp4">
+    </video>
+
+    <!-- Technical Readout Panel -->
+    <div class="tech-readout-panel">
+        <div class="readout-line">
+            <span class="readout-label">SYS_STATUS</span>
+            <span class="readout-separator">:</span>
+            <span class="readout-value online">NOMINAL</span>
+        </div>
+        <div class="readout-line">
+            <span class="readout-label">UPTIME</span>
+            <span class="readout-separator">:</span>
+            <span class="readout-value" id="uptime">00:00:00</span>
+        </div>
+        <div class="readout-line">
+            <span class="readout-label">LAT/LONG</span>
+            <span class="readout-separator">:</span>
+            <span class="readout-value">37.5079° N, 15.0830° E</span>
+        </div>
+    </div>
+
+    <!-- Decorative Code Blocks -->
+    <div class="code-decoration code-1">
+        <pre>INIT: PORTFOLIO_SYS
+VER: 2.4.1
+STAT: READY</pre>
+    </div>
+    <div class="code-decoration code-2">
+        <pre>{
+  "mode": "interactive",
+  "status": "online"
+}</pre>
+    </div>
+
+    <script src="menu.js"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="main.js"></script>
+    <script src="mobile_sfera_home.js"></script>
+    <script src="transition.js"></script>
+    <script src="cursor.js"></script>
+    <script src="background.js"></script>
+    <script src="nasa-uptime.js"></script>
+</body>
+
+</html>
