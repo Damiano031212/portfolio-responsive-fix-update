@@ -1,0 +1,1043 @@
+/* ==========================================================================
+   1. SETUP GLOBALE E RESET
+   Impostazioni di base per tutta la pagina (sfondo, scrollbar, cursore nativo).
+   ========================================================================== */
+p {
+    margin: 0;
+}
+
+html,
+body {
+    background-color: #141414;
+    /* Sfondo nero profondo */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+   FIX PER "FLASH" DELLA PAGINA (ANTI-FOUC)
+   Forza l'overlay visibile immediatamente se rilevato dallo script in head
+   ========================================================================== */
+
+/* Anti-FOUC removed - see navbar.css */
+
+/* ========================================
+   GLOBAL HUD OVERLAY
+   ======================================== */
+
+.hud-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.corner-marker {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-color: rgba(167, 167, 167, 0.5);
+    border-style: solid;
+}
+
+.corner-marker.top-left {
+    top: 24px;
+    left: 24px;
+    border-width: 1px 0 0 1px;
+}
+
+.corner-marker.top-right {
+    top: 24px;
+    right: 24px;
+    border-width: 1px 1px 0 0;
+}
+
+.corner-marker.bottom-left {
+    bottom: 24px;
+    left: 24px;
+    border-width: 0 0 1px 1px;
+}
+
+.corner-marker.bottom-right {
+    bottom: 24px;
+    right: 24px;
+    border-width: 0 1px 1px 0;
+}
+
+.side-markers {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.side-markers.left {
+    left: 16px;
+}
+
+.side-markers.right {
+    right: 16px;
+}
+
+.side-markers span {
+    width: 4px;
+    height: 4px;
+
+    background: rgba(167, 167, 167, 0.5);
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   CURSORE PERSONALIZZATO CON MIX-BLEND-MODE
+   ========================================================================== */
+
+.cursor {
+    display: block;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    /* Fondamentale: permette al cursore di invertire i colori di ciò che sta sotto */
+    mix-blend-mode: difference;
+}
+
+/* Il punto centrale deve essere bianco per invertire correttamente */
+.cursor-dot {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    z-index: 10001;
+}
+
+/* L'anello esterno */
+.cursor-ring {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff;
+
+    position: fixed;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+    z-index: 10000;
+    opacity: 0.8;
+}
+
+/* Hover State: ingrandiamo il punto centrale */
+body.cursor-hover .cursor-dot {
+    width: 60px;
+    height: 60px;
+    /* Rimuoviamo box-shadow se vogliamo un effetto difference pulito sui bordi */
+    box-shadow: none;
+}
+
+body.cursor-hover .cursor-ring {
+    width: 70px;
+    height: 70px;
+    opacity: 0.4;
+}
+
+/* ==========================================================================
+   NASA-INSPIRED AESTHETIC ELEMENTS
+   ========================================================================== */
+
+/* Scan Lines Overlay */
+.scan-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 998;
+    opacity: 0.03;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px);
+}
+
+/* Calibration Grid */
+.calibration-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 997;
+    opacity: 0.015;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* Technical Readout Panel */
+.tech-readout-panel {
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    display: none;
+    /* Hidden on mobile by default */
+}
+
+.readout-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.readout-line:last-child {
+    margin-bottom: 0;
+}
+
+.readout-label {
+    color: rgba(167, 167, 167, 0.8);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.readout-separator {
+    color: rgba(167, 167, 167, 0.5);
+}
+
+.readout-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.readout-value.online {
+    color: #00FF88;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+}
+
+/* Decorative Code Blocks */
+.code-decoration {
+    position: fixed;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 0.65rem;
+    line-height: 1.6;
+    color: rgba(167, 167, 167, 0.4);
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+    /* Hidden on mobile by default */
+}
+
+.code-decoration pre {
+    margin: 0;
+}
+
+.code-1 {
+    top: 20%;
+    left: 2%;
+}
+
+.code-2 {
+    bottom: 20%;
+    right: 2%;
+}
+
+
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Sta dietro */
+    pointer-events: none;
+    /* Permette al mouse di passare "attraverso" per cliccare i tasti */
+}
+
+
+/* Responsive Navigation */
+/* Navigation removed - see navbar.css */
+
+
+#container {
+    display: block;
+    position: fixed;
+    /* Effetto di inversione colori */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+#container canvas {
+    filter: none;
+}
+
+body.light-mode #container canvas {
+    filter: drop-shadow(0 0 1px #000000);
+}
+
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: none;
+    pointer-events: auto;
+}
+
+.status-badge:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-color: #10b981;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 2s infinite;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+button,
+input,
+textarea,
+select,
+label {
+    cursor: default;
+}
+
+/* style.css */
+body.light-mode .status-text {
+    color: #000033;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    /* Changed from 60px to 70px */
+    height: 34px;
+    box-shadow: 0 0 4px #ffffff;
+    border-radius: 34px;
+    cursor: none;
+    pointer-events: auto;
+}
+
+body.light-mode .switch {
+    box-shadow: 0 0 4px #000000;
+}
+
+.switch #input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    cursor: none;
+    pointer-events: auto;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    z-index: 0;
+    overflow: hidden;
+    cursor: none;
+    pointer-events: auto;
+}
+
+.sun-moon {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(0, 0, 0);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+#input:checked+.slider {
+    background-color: black;
+}
+
+#input:focus+.slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+#input:checked+.slider .sun-moon {
+    /* Increased translation by 10px (26px -> 36px) to match width increase */
+    -webkit-transform: translateX(36px);
+    -ms-transform: translateX(36px);
+    transform: translateX(36px);
+    background-color: white;
+    -webkit-animation: rotate-center 0.6s ease-in-out both;
+    animation: rotate-center 0.6s ease-in-out both;
+}
+
+.moon-dot {
+    opacity: 0;
+    transition: 0.4s;
+    fill: gray;
+}
+
+#input:checked+.slider .sun-moon .moon-dot {
+    opacity: 1;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round .sun-moon {
+    border-radius: 50%;
+}
+
+#moon-dot-1 {
+    left: 10px;
+    top: 3px;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    z-index: 4;
+}
+
+#moon-dot-2 {
+    left: 2px;
+    top: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    z-index: 4;
+}
+
+#moon-dot-3 {
+    left: 16px;
+    top: 18px;
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    z-index: 4;
+}
+
+#light-ray-1 {
+    left: -8px;
+    top: -8px;
+    position: absolute;
+    width: 43px;
+    height: 43px;
+    z-index: -1;
+    fill: rgb(0, 0, 0);
+    opacity: 10%;
+}
+
+#light-ray-2 {
+    left: -50%;
+    top: -50%;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    z-index: -1;
+    fill: rgb(0, 0, 0);
+    opacity: 10%;
+}
+
+#light-ray-3 {
+    left: -18px;
+    top: -18px;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: -1;
+    fill: white;
+    opacity: 10%;
+}
+
+.cloud-light {
+    position: absolute;
+    fill: #eee;
+    animation-name: cloud-move;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+.cloud-dark {
+    position: absolute;
+    fill: #ccc;
+    animation-name: cloud-move;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+}
+
+/* Clouds shifted +5px right to balance the extra width */
+#cloud-1 {
+    left: 35px;
+    /* 30 + 5 */
+    top: 15px;
+    width: 40px;
+}
+
+#cloud-2 {
+    left: 49px;
+    /* 44 + 5 */
+    top: 10px;
+    width: 20px;
+}
+
+#cloud-3 {
+    left: 23px;
+    /* 18 + 5 */
+    top: 24px;
+    width: 30px;
+}
+
+#cloud-4 {
+    left: 41px;
+    /* 36 + 5 */
+    top: 18px;
+    width: 40px;
+}
+
+#cloud-5 {
+    left: 53px;
+    /* 48 + 5 */
+    top: 14px;
+    width: 20px;
+}
+
+#cloud-6 {
+    left: 27px;
+    /* 22 + 5 */
+    top: 26px;
+    width: 30px;
+}
+
+@keyframes cloud-move {
+    0% {
+        transform: translateX(0px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    80% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.stars {
+    transform: translateY(-32px);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.star {
+    fill: white;
+    position: absolute;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    animation-name: star-twinkle;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#input:checked+.slider .stars {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Stars shifted +5px right to balance the extra width */
+#star-1 {
+    width: 20px;
+    top: 2px;
+    left: 8px;
+    /* 3 + 5 */
+    animation-delay: 0.3s;
+}
+
+#star-2 {
+    width: 6px;
+    top: 16px;
+    left: 8px;
+    /* 3 + 5 */
+}
+
+#star-3 {
+    width: 12px;
+    top: 20px;
+    left: 15px;
+    /* 10 + 5 */
+    animation-delay: 0.6s;
+}
+
+#star-4 {
+    width: 18px;
+    top: 0px;
+    left: 23px;
+    /* 18 + 5 */
+    animation-delay: 1.3s;
+}
+
+@keyframes star-twinkle {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.2);
+    }
+
+    80% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+._container_responsive {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile Menu & Anti-FOUC removed - see navbar.css */
+
+.text_under-decoration {
+    text-decoration-color: #ffffff;
+
+    z-index: 10;
+}
+
+.status-text {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255);
+    margin: 4px;
+
+}
+
+
+
+@media screen and (min-width: 1024px) {
+
+    /* ==========================================================================
+   3. SFONDO E CANVAS (VISUAL EFFECTS)
+   Gestione degli elementi grafici di sfondo (fumo, three.js, video).
+   ========================================================================== */
+
+    /* Il canvas del fumo/animazione */
+
+    #hero-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        /* Sta dietro */
+        pointer-events: none;
+        /* Permette al mouse di passare "attraverso" per cliccare i tasti */
+    }
+
+
+    /* Contenitore generico per effetti di fusione (Three.js) */
+    #container {
+        display: block;
+        position: fixed;
+        /* Effetto di inversione colori */
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: auto;
+    }
+
+    /* ==========================================================================
+   NASA AESTHETIC ELEMENTS - DESKTOP ONLY
+   ========================================================================== */
+
+    .tech-readout-panel {
+        display: block;
+    }
+
+    .code-decoration {
+        display: block;
+    }
+
+    /* ==========================================================================
+   4. STRUTTURA GENERALE DELLA PAGINA
+   Layout principali per la homepage.
+   ========================================================================== */
+
+    /* ==========================================================================
+   5. NAVIGAZIONE (HEADER)
+   La barra in alto con i link (Home, Work, Contatti, About).
+   ========================================================================== */
+    body {
+        background-color: #141414;
+        /* Sfondo nero profondo */
+        margin: 0;
+        padding: 0;
+
+        cursor: none;
+
+        /* Nasconde la barra di scorrimento laterale per un look più pulito */
+        scrollbar-width: none;
+        /* Per Firefox */
+        -ms-overflow-style: none;
+        /* Per IE/Edge */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        /* Spinge il contenuto verso il basso */
+        height: 100vh;
+        /* Occupa tutta l'altezza dello schermo */
+        overflow: hidden;
+        /* Evita scroll indesiderati */
+    }
+
+    .menu {
+        display: none;
+    }
+
+    /* Navigation is now global - styles removed from here to avoid duplication */
+
+
+
+
+    /* Contenitore per allineare "Presso Catania" e l'icona posizione */
+    .container_position {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: flex-end;
+    }
+
+    .position {
+        width: 11.2px;
+        height: 25px;
+        background: url(position.svg) no-repeat top;
+        background-size: contain;
+    }
+
+
+    /* ==========================================================================
+   8. CURSORE PERSONALIZZATO (INTERAZIONE)
+   Il cerchio bianco che segue il mouse.
+   ========================================================================== */
+
+    /* Forza la scomparsa del cursore nativo anche su link e input */
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active,
+    button,
+    input,
+    textarea,
+    select,
+    label {
+        cursor: none !important;
+    }
+
+    /* ==========================================================================
+   9. PAGE TRANSITION (LA TENDINA)
+   L'effetto "shutter" bianco che scende quando cambi pagina.
+   ========================================================================== */
+
+    .page-shutter {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        pointer-events: none;
+        z-index: 10000;
+        /* Sopra anche al cursore se serve, o sotto (qui 10000 è altissimo) */
+        mix-blend-mode: difference;
+
+        /* Stato Iniziale: Nascosto in alto */
+        transform: translateY(-100%);
+
+        transition: transform 1s ease-in-out;
+        will-change: transform;
+        /* Ottimizza performance */
+    }
+
+    /* Classe aggiunta da JS per far scendere la tendina */
+    .page-shutter.down {
+        transform: translateY(0%);
+        /* Copre tutto lo schermo */
+        pointer-events: all;
+        /* Blocca i click mentre transiziona */
+        transition: transform 1s ease-in-out;
+    }
+
+}
+
+/* Hero Section */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    animation: fadeInUp 0.8s ease-out;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    margin-top: auto;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+
+}
+
+.hero-title {
+    font-family: "Inter", sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(180deg, #FFFFFF 0%, #AAAAAA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cursor {
+        display: none;
+    }
+
+    .cursor-dot {
+        display: none;
+    }
+
+    .cursor-ring {
+        display: none;
+    }
+
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.7rem;
+    }
+
+    .hero-content {
+        margin-top: auto;
+        margin-bottom: 32px;
+    }
+
+    #hero-canvas {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .cursor {
+        display: none;
+    }
+
+    .cursor-dot {
+        display: none;
+    }
+
+    .cursor-ring {
+        display: none;
+    }
+
+    .hero {
+        padding: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .status-badge {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .hero-content {
+        margin-top: auto;
+        margin-bottom: 32px;
+    }
+
+    #hero-canvas {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Nasconde il cursore di sistema */
+body {
+    cursor: none;
+}
+
+/* ==========================================================================
+   MOBILE/TABLET OVERRIDES
+   ========================================================================== */
+@media screen and (max-width: 1023px) {
+
+    .corner-marker.top-left,
+    .corner-marker.top-right {
+        display: none !important;
+    }
+}
