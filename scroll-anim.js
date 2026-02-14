@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '.mission-brief-panel',
         '.brief-item',
         '.hud-element',
+        '.footer-info-panel',
         '.scroll-indicator'
     ];
 
