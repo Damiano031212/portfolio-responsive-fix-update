@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show/Hide on scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 2400) {
             flipCoinWrapper.classList.add('visible');
         } else {
             flipCoinWrapper.classList.remove('visible');
@@ -41,3 +41,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     });
 });
+
